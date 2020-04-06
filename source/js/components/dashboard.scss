@@ -1,0 +1,16 @@
+.wrapper {
+  margin: 10px;
+  display: grid;
+  grid-template-columns: 31% 31% 31%;
+  grid-gap: 7vh;
+  background-color: #fff;
+  color: #444;
+}
+
+.box {
+  background-color: #444;
+  color: #fff;
+  border-radius: 5px;
+  padding: 30%;
+  font-size: 150%;
+}
