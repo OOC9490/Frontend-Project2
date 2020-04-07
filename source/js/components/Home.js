@@ -24,12 +24,12 @@ const Home = () => {
       <div>
         <h1>Customer</h1>
         <Link to="/userlogin" ><Button>Login</Button></Link>
-        <Button>SignUp</Button>
+        <Link to="/usersignup" ><Button>Signup</Button></Link>
       </div>
       <div>
         <h1>Supplier</h1>
         <Link to="/loginstore" ><Button>Login</Button></Link>
-        <Button>SignUp</Button>
+        <Link to="/storesignup" ><Button>Signup</Button></Link>
       </div>
     </div>
   );
