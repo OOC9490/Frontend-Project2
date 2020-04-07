@@ -22,14 +22,9 @@ const Home = () => {
   return (
     <div>
       <div>
-        <h1>Customer</h1>
+        <h1>WELCOME</h1>
         <Link to="/userlogin" ><Button>Login</Button></Link>
         <Link to="/usersignup" ><Button>Signup</Button></Link>
-      </div>
-      <div>
-        <h1>Supplier</h1>
-        <Link to="/loginstore" ><Button>Login</Button></Link>
-        <Link to="/storesignup" ><Button>Signup</Button></Link>
       </div>
     </div>
   );
