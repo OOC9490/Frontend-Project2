@@ -5,7 +5,7 @@ class LoginStore extends Component {
     return (
         <div>
             <form>
-              <label>User:</label>
+              <label>Store:</label>
               <input type="text" value="Submit" />
               <input type="submit" value="Submit" />
             </form>

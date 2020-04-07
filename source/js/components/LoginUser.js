@@ -6,7 +6,7 @@ class LoginUser extends Component {
         <div>
             <form>
               <label>User:</label>
-              <input type="text" value="Submit" />
+              <input type="text" value="Uwais" />
               <input type="submit" value="Submit" />
             </form>
         </div>
