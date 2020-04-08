@@ -7,7 +7,10 @@ class LoginUser extends Component {
 
     this.state = {
       modalOpen: false,
+      email: "",
+      password: ""
     };
+
     this.toggle = this.toggle.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
