@@ -15,7 +15,8 @@
       "@emotion/babel-preset-css-prop"
     ],
     "plugins": [
-      "emotion"
+      "emotion",
+      "@babel/plugin-proposal-class-properties"
     ]
   },
   "keywords": [],
@@ -23,6 +24,7 @@
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.9.0",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/preset-env": "^7.9.0",
     "@babel/preset-react": "^7.9.4",
     "@emotion/babel-preset-css-prop": "^10.0.27",
