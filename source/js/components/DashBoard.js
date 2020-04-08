@@ -20,7 +20,7 @@ class DashBoard extends Component {
               <Card inverse style={{margin:20}}>
                 <CardImg src="http://placekitten.com/100/100" alt="Card image cap" />
                 <CardImgOverlay>
-                  <CardTitle key={s}>{s}</CardTitle>
+                  <CardTitle key={s}><Link to={`/dashboard/${s}`}>{s}</Link></CardTitle>
                 </CardImgOverlay>
               </Card>
             </Col>

@@ -19,7 +19,7 @@ return (
         {/*<Route path="/userlogin" component={ LoginUser } />*/}
         <Route path="/dashboard" component={ DashBoard } />
         {/*<Route path="/usersignup" component={ UserSignUp } />*/}
-        <Route path="/storepage" component={ StorePage } />
+        <Route path="/dashboard/:storepage" component={ StorePage } />
     </div>
   </Router>
 );
