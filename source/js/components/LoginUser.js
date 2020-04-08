@@ -16,14 +16,24 @@ class LoginUser extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit(event) {
-   event.preventDefault();
-   console.log("submit");
+  handleSubmit(e) {
+   e.preventDefault();
+
+   const { email, password } = this.state;
+   let user = {
+      email: email,
+      password: password
+    };
+
+    console.log("Submitted");
+    console.log(user);
    };
 
-   handleChange(event){
-   console.log(event.target.value);
-  }
+   handleChange(e){
+     this.setState({
+       [e.target.name]: e.target.value
+     });
+ };
 
   toggle() {
       this.setState({
@@ -34,7 +44,7 @@ class LoginUser extends Component {
   render() {
     return (
         <div>
-        <Button onClick={this.toggle}>Login</Button>
+        <Button onClick={this.toggle} style={{ marginTop: '1em' }}>Login</Button>
         <Modal isOpen={this.state.modalOpen} toggle={this.toggle} >
           <ModalHeader toggle={this.toggle}>Login</ModalHeader>
           <ModalBody>
@@ -44,6 +54,7 @@ class LoginUser extends Component {
                   <Label>Email</Label>
                   <Input
                     type="email"
+                    name="email"
                     placeholder="uwais@ga.co"
                     onChange={this.handleChange}
                   />
@@ -52,6 +63,7 @@ class LoginUser extends Component {
                   <Label>Password</Label>
                   <Input
                     type="password"
+                    name="password"
                     placeholder="password"
                     onChange={this.handleChange}
                   />

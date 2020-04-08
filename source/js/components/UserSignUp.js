@@ -7,8 +7,13 @@ class UserSignUp extends Component {
 
     this.state = {
       modalOpen: false,
+      email: "",
+      password: "",
+      suburb: ""
     };
     this.toggle = this.toggle.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   toggle() {
@@ -16,22 +21,53 @@ class UserSignUp extends Component {
         modalOpen: !this.state.modalOpen
       });
     }
+
+    handleSubmit(e) {
+     e.preventDefault();
+
+     const { email, password, suburb } = this.state;
+     let signup = {
+        email: email,
+        password: password,
+        suburb: suburb
+      };
+
+      console.log("Submitted");
+      console.log(signup);
+     };
+
+     handleChange(e){
+       this.setState({
+         [e.target.name]: e.target.value
+       });
+   };
+
     render() {
     return (
         <div>
-        <Button onClick={this.toggle}>Signup</Button>
+        <Button onClick={this.toggle} style={{ marginTop: '1em' }}>Signup</Button>
         <Modal isOpen={this.state.modalOpen} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>Signup!!</ModalHeader>
           <ModalBody>
           <Container>
-              <Form>
+              <Form onSubmit={this.handleSubmit}>
                 <FormGroup mb={2}>
                   <Label>Email</Label>
-                  <Input type="email" placeholder="uwais@ga.co" />
+                  <Input
+                  type="email"
+                  name="email"
+                  placeholder="uwais@ga.co"
+                  onChange={this.handleChange}
+                  />
                 </FormGroup>
                 <FormGroup>
                   <Label>Suburb</Label>
-                  <Input type="text" placeholder="Macquarie Links" />
+                  <Input
+                  type="text"
+                  name="suburb"
+                  placeholder="Macquarie Links"
+                  onChange={this.handleChange}
+                  />
                 </FormGroup>
                 <FormGroup>
                   <Label>Image</Label>
@@ -45,7 +81,12 @@ class UserSignUp extends Component {
                 </FormGroup>
                 <FormGroup>
                   <Label>Password</Label>
-                  <Input type="password" placeholder="password" />
+                  <Input
+                  type="password"
+                  name="password"
+                  placeholder="password"
+                  onChange={this.handleChange}
+                  />
                 </FormGroup>
                 <FormGroup check row>
                   <Col sm={{ size: 20, offset: 5 }}>
