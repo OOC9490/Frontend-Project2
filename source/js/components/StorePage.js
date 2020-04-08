@@ -14,7 +14,7 @@ class StorePage extends Component {
       <div>
         <Container className="ml-5" style={{ marginTop: '2em' }}>
           <Jumbotron>
-            <h1>Store Page</h1>
+            <h1>{this.props.match.params.storepage}</h1>
           </Jumbotron>
           <ListGroup>
           {this.state.storeItems.map(item => (
