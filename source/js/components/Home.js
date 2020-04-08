@@ -41,19 +41,13 @@ const Home = () => {
     <div>
       <div>
         <Jumbotron>
-            <Container>
                 <Row>
                     <Col className="text-center">
                         <h1>WELCOME</h1>
-                        <p>
                           <LoginUser />
-                        </p>
-                        <p>
                           <UserSignUp />
-                        </p>
                     </Col>
                 </Row>
-            </Container>
         </Jumbotron>
       </div>
     </div>

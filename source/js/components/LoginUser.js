@@ -1,28 +1,48 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input, FormText, Container, Col, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
-const LoginUser = (props) => {
-  const {
-    className
-  } = props;
+class LoginUser extends Component {
+  constructor(props) {
+    super(props);
 
-  const [modal, setModal] = useState(false);
+    this.state = {
+      modalOpen: false,
+    };
+    this.toggle = this.toggle.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
-  const toggle = () => setModal(!modal);
+  handleSubmit(event) {
+   event.preventDefault();
+   console.log("submit");
+   };
 
+   handleChange(event){
+   console.log(event.target.value);
+  }
+
+  toggle() {
+      this.setState({
+        modalOpen: !this.state.modalOpen
+      });
+    }
+
+  render() {
     return (
         <div>
-        <Button onClick={toggle}>Login</Button>
-        <Modal isOpen={modal} toggle={toggle} className={className}>
-          <ModalHeader toggle={toggle}>Login!!</ModalHeader>
+        <Button onClick={this.toggle}>Login</Button>
+        <Modal isOpen={this.state.modalOpen} toggle={this.toggle} >
+          <ModalHeader toggle={this.toggle}>Login</ModalHeader>
           <ModalBody>
           <Container>
-              <Form>
+              <Form onSubmit={this.handleSubmit}>
                 <FormGroup mb={2}>
                   <Label>Email</Label>
                   <Input
                     type="email"
                     placeholder="uwais@ga.co"
+                    onChange={this.handleChange}
                   />
                 </FormGroup>
                 <FormGroup>
@@ -30,6 +50,7 @@ const LoginUser = (props) => {
                   <Input
                     type="password"
                     placeholder="password"
+                    onChange={this.handleChange}
                   />
                 </FormGroup>
                 <FormGroup check row>
@@ -43,6 +64,7 @@ const LoginUser = (props) => {
         </Modal>
         </div>
     );
+}
 }
 
 export default LoginUser;
