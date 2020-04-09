@@ -5,12 +5,19 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode production",
-    "start": "webpack-dev-server --open --mode development",
+    "start": "webpack-dev-server --open --hot --mode development",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "babel": {
     "presets": [
-      "@babel/preset-env",
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "10"
+          }
+        }
+      ],
       "@babel/preset-react",
       "@emotion/babel-preset-css-prop"
     ],
@@ -46,6 +53,7 @@
   "dependencies": {
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
+    "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
     "express": "^4.17.1",
     "react": "^16.13.1",
