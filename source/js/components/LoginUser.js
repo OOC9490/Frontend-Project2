@@ -1,20 +1,27 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input, FormText, Container, Col, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
-const LoginUser = (props) => {
-  const {
-    className
-  } = props;
+class LoginUser extends Component {
+  constructor(props) {
+    super(props);
 
-  const [modal, setModal] = useState(false);
+    this.state = {
+      isOpen: false
+    };
 
-  const toggle = () => setModal(!modal);
+    this.toggle = this.toggle.bind(this);
+  }
 
+  toggle() {
+    this.setState({ isOpen: !this.state.isOpen })
+  };
+
+  render() {
     return (
         <div>
-        <Button onClick={toggle}>Login</Button>
-        <Modal isOpen={modal} toggle={toggle} className={className}>
-          <ModalHeader toggle={toggle}>Login!!</ModalHeader>
+        <Button onClick={ this.toggle } className="mb-3">Login</Button>
+        <Modal isOpen={ this.state.isOpen } toggle={ this.toggle } >
+          <ModalHeader toggle={ this.toggle }>Login!!</ModalHeader>
           <ModalBody>
           <Container>
               <Form>
@@ -43,6 +50,7 @@ const LoginUser = (props) => {
         </Modal>
         </div>
     );
-}
+  }
+};
 
 export default LoginUser;
