@@ -7,7 +7,6 @@ import Home from './Home';
 import Navigation from './Navigation';
 import DashBoard from './DashBoard';
 import UserSignUp from './UserSignUp';
-import StorePage from './StorePage';
 import Orders from './Orders';
 
 function App() {
@@ -18,8 +17,6 @@ return (
         <Route exact path="/" component={ Home } />
         <Route path="/dashboard/" component={ DashBoard } />
         <Route path="/dashboard/:orders" component={ Orders } />
-        {/*<Route path="/orders" component={ Orders } />*/}
-        {/*<Route path="/dashboard/:storepage" component={ StorePage } />*/}
     </div>
   </Router>
 );
