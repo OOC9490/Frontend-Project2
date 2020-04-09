@@ -43,12 +43,12 @@ class DashBoard extends Component {
                     src={
                       s.image !== ""
                         ? s.image
-                        : "http://placekitten.com/100/100"
+                        : "http://placekitten.com/100/150"
                     }
                     alt="Card image cap"
                   />
                   <CardImgOverlay>
-                    <CardTitle key={s.id}>
+                    <CardTitle key={s._id}>
                       <Link to={`/dashboard/${s.name}`}>{s.name}</Link>
                     </CardTitle>
                   </CardImgOverlay>
