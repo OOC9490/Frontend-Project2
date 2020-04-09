@@ -15,7 +15,7 @@ return (
     <div className="App">
       <Navigation />
         <Route exact path="/" component={ Home } />
-        <Route path="/dashboard/" component={ DashBoard } />
+        <Route path="/dashboard/" exact component={ DashBoard } />
         <Route path="/dashboard/:orders" component={ Orders } />
     </div>
   </Router>
