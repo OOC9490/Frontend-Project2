@@ -99,6 +99,7 @@ class UserSignUp extends Component {
         </Modal>
         </div>
     );
+  }
 }
 }
 

@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import LoginUser from './LoginUser';
 import UserSignUp from './UserSignUp';
-// import styled from '@emotion/styled';
+import styled from '@emotion/styled';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import {
@@ -20,7 +20,7 @@ import {
     Button
 } from 'reactstrap';
 
-// const Button = styled.button`
+// const ButtonEmotion = styled.button`
 //   padding: 15px;
 //   background-color: hotpink;
 //   border: 2px solid hotpink;
@@ -36,11 +36,12 @@ import {
 //   }
 // `
 
-const Home = () => {
-  return (
-    <div>
+class Home extends Component {
+  render() {
+    return (
       <div>
-        <Jumbotron>
+        <div>
+          <Jumbotron>
                 <Row>
                     <Col className="text-center">
                         <h1>WELCOME</h1>
@@ -48,10 +49,11 @@ const Home = () => {
                           <UserSignUp />
                     </Col>
                 </Row>
-        </Jumbotron>
+          </Jumbotron>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default Home;

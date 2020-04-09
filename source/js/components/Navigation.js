@@ -12,11 +12,9 @@ import {
     Container,
     Row,
     Col,
-    Jumbotron,
     Button
 } from 'reactstrap';
 
-// Components //
 class Navigation extends Component {
   constructor(props) {
         super(props);
@@ -26,24 +24,29 @@ class Navigation extends Component {
             isOpen: false
         };
     }
+
     toggle() {
         this.setState({
             isOpen: !this.state.isOpen
         });
     }
+
     render() {
         return (
             <div>
-                <Navbar color="light" light expand="md">
+                <Navbar color="light" light expand="md" >
                     <Link to="/"><NavbarBrand>eStore</NavbarBrand></Link>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
                             <NavItem>
+                                <Link to="/" ><NavLink>Home</NavLink></Link>
+                            </NavItem>
+                            <NavItem>
                                 <Link to="/dashboard" ><NavLink>Stores</NavLink></Link>
                             </NavItem>
                             <NavItem>
-                                <Link to="/" ><NavLink>Orders</NavLink></Link>
+                                <Link to="/orders" ><NavLink>Cart</NavLink></Link>
                             </NavItem>
                         </Nav>
                     </Collapse>

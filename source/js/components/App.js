@@ -5,10 +5,10 @@ import { HashRouter as Router, Route } from 'react-router-dom';
 
 import Home from './Home';
 import Navigation from './Navigation';
-import LoginUser from './LoginUser';
 import DashBoard from './DashBoard';
 import UserSignUp from './UserSignUp';
 import StorePage from './StorePage';
+import Orders from './Orders';
 
 function App() {
 return (
@@ -16,9 +16,8 @@ return (
     <div className="App">
       <Navigation />
         <Route exact path="/" component={ Home } />
-        {/*<Route path="/userlogin" component={ LoginUser } />*/}
         <Route path="/dashboard" component={ DashBoard } />
-        {/*<Route path="/usersignup" component={ UserSignUp } />*/}
+        <Route path="/orders" component={ Orders } />
         <Route path="/dashboard/:storepage" component={ StorePage } />
     </div>
   </Router>

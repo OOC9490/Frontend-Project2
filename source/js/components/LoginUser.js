@@ -39,12 +39,13 @@ class LoginUser extends Component {
       this.setState({
         modalOpen: !this.state.modalOpen
       });
-    }
+    };
+=======
 
   render() {
     return (
         <div>
-        <Button onClick={this.toggle} style={{ marginTop: '1em' }}>Login</Button>
+        <Button onClick={this.toggle} className="mb-3">Login</Button>
         <Modal isOpen={this.state.modalOpen} toggle={this.toggle} >
           <ModalHeader toggle={this.toggle}>Login</ModalHeader>
           <ModalBody>
@@ -79,7 +80,7 @@ class LoginUser extends Component {
         </Modal>
         </div>
     );
-}
-}
+  }
+};
 
 export default LoginUser;
