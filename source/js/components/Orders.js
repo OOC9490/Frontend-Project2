@@ -52,7 +52,7 @@ class Orders extends Component {
                         }
                     ]
                 },
-                
+
                 cart: {
                     id: uuid(),
                     name: "Shopping Cart",
