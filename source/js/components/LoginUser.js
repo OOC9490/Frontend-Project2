@@ -40,7 +40,6 @@ class LoginUser extends Component {
         modalOpen: !this.state.modalOpen
       });
     };
-=======
 
   render() {
     return (

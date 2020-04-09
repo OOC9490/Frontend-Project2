@@ -32,14 +32,15 @@ class DashBoard extends Component {
           <CardDeck>
             {this.state.stores.map((s) => (
               <Col sm="3">
-                <Card inverse style={{ margin: 20 }}>
+                <Card inverse style={{ margin: 20, borderRadius: 15 }}>
                   <CardImg
-                    src="http://placekitten.com/100/100"
+                    style={{ borderRadius: 15 }}
+                    src="https://images.pexels.com/photos/890507/pexels-photo-890507.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
                     alt="Card image cap"
                   />
                   <CardImgOverlay>
                     <CardTitle key={s}>
-                      <Link to={`/dashboard/${s}`}>{s}</Link>
+                      <Link style={{ fontSize: 40 }} to={`/dashboard/${s}`}>{s}</Link>
                     </CardTitle>
                   </CardImgOverlay>
                 </Card>

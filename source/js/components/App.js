@@ -16,9 +16,10 @@ return (
     <div className="App">
       <Navigation />
         <Route exact path="/" component={ Home } />
-        <Route path="/dashboard" component={ DashBoard } />
-        <Route path="/orders" component={ Orders } />
-        <Route path="/dashboard/:storepage" component={ StorePage } />
+        <Route path="/dashboard/" component={ DashBoard } />
+        <Route path="/dashboard/:orders" component={ Orders } />
+        {/*<Route path="/orders" component={ Orders } />*/}
+        {/*<Route path="/dashboard/:storepage" component={ StorePage } />*/}
     </div>
   </Router>
 );
