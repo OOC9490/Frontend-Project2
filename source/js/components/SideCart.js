@@ -18,7 +18,8 @@ class SideCart extends Component {
             <div>
                 <CartTitle>CART</CartTitle>
                 <CartContents>
-                    { this.props.items.length === 0 ? "Your cart is empty! (drag items here to start shopping!)" : this.props.items.map((item) => <Item key={ item.id } item={ item } isCart={true}/>) }
+                    { this.props.items.length === 0 ? "Your cart is empty! (add items here to start shopping!)" 
+                    : this.props.items.map((item) => <Item key={ item.id } item={ item } isCart={true} remove={ this.props.remove }/>) }
                 </CartContents>
             </div>
         );
