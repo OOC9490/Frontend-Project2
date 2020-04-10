@@ -48,7 +48,7 @@ class DashBoard extends Component {
                     alt="Card image cap"
                   />
                   <CardImgOverlay>
-                    <CardTitle key={s.id}>
+                    <CardTitle key={s._id} id={s._id}>
                       <Link to={`/dashboard/${s.name}`}>{s.name}</Link>
                     </CardTitle>
                   </CardImgOverlay>
