@@ -5,7 +5,7 @@ import Retailer from "./Retailer";
 import SideCart from "./SideCart";
 
 // import ajax functions
-import { getAllItems, getAllStores } from "../ajaxCalls";
+import { getAllItems, getAllStores, getAllCategories } from "../ajaxCalls";
 
 // used to parse url
 import queryString from "query-string";
@@ -73,24 +73,54 @@ class Orders extends Component {
   }
 
   async componentDidMount() {
-    // async await method
+    // async await methods
     const items = await getAllItems();
-    const sellers = await getAllStores();
+    const sellers = await getAllStores(); // inefficient, can be done server side(findBy)
+    const categories = await getAllCategories();
 
+    // get the seller
     const seller = sellers.data.filter(
       (s) => s.slug === queryString.parse(this.props.location.search).name
-    );
+    )[0];
 
+    // get category name
+    const categoryMatch = function (cid) {
+      const category = categories.data.filter((c) => cid === c._id);
+      return category[0];
+    };
+
+    // items seller sells
+    const selling = items.data
+      .filter((item) => item.seller === seller._id)
+      .map((item) => ({
+        id: uuid(),
+        name: categoryMatch(item.category).name,
+        items: items.data
+          .filter(
+            (i) =>
+              i.category === categoryMatch(item.category)._id &&
+              i.seller === seller._id
+          )
+          .map((i) => ({
+            id: uuid(),
+            name: i.name,
+            unitPrice: parseFloat(i.price.$numberDecimal),
+          })),
+      }));
+
+    // construct state
     this.setState(
       {
         items: items.data,
+        retailer: {
+          name: seller.name,
+          suburb: seller.location.city,
+          logo: seller.image,
+          categories: selling,
+        },
       },
       () => {
-        console.log(
-          this.state.items,
-          queryString.parse(this.props.location.search),
-          seller
-        );
+        console.log(this.state.items, this.state.retailer, seller, categories);
       }
     );
   }

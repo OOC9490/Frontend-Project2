@@ -19,3 +19,10 @@ export async function getAllItems() {
 
   return response.data;
 }
+
+// Get all categories
+export async function getAllCategories() {
+  const response = await axios.get(AJAX_URL + `/categories`);
+
+  return response.data;
+}
