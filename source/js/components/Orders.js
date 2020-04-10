@@ -1,96 +1,133 @@
-import React, { Component } from 'react';
-import styled from '@emotion/styled';
-import uuid from 'react-uuid';
-import Retailer from './Retailer';
-import SideCart from './SideCart';
+import React, { Component } from "react";
+import styled from "@emotion/styled";
+import uuid from "react-uuid";
+import Retailer from "./Retailer";
+import SideCart from "./SideCart";
+
+// import ajax functions
+import { getAllItems, getAllStores } from "../ajaxCalls";
+
+// used to parse url
+import queryString from "query-string";
 
 const Wrapper = styled.div`
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    grid-column-gap: 1em;
-    border-radius: 0.5em;
-    width: 100%;
-    padding: 1em;
-    background-color: slategray;
-    box-sizing: border-box;
-`
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-column-gap: 1em;
+  border-radius: 0.5em;
+  width: 100%;
+  padding: 1em;
+  background-color: slategray;
+  box-sizing: border-box;
+`;
 
 const StoresList = styled.div`
-    display: grid;
-    grid-template-rows: auto;
-    grid-row-gap: 1em;
+  display: grid;
+  grid-template-rows: auto;
+  grid-row-gap: 1em;
 `;
 
 class Orders extends Component {
-    constructor(props){
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            retailer:
-                {
-                    name: "Woolworths",
-                    suburb: "Parramatta",
-                    logo: "https://www.feedappeal.org.au/wp-content/uploads/2019/06/Woolworths_stacked_CMYK_Neg.png",
-                    categories: [
-                        {
-                            id: uuid(),
-                            name: "Bathroom Supplies",
-                            items: [
-                                { id: uuid(), name: "Toilet Paper", unitPrice: 3.00 },
-                                { id: uuid(), name: "Toothpaste", unitPrice: 2.75 },
-                                { id: uuid(), name: "Toothbrush", unitPrice: 2.50 }
-                            ]
-                        },
-                        {
-                            id: uuid(),
-                            name: "Meat",
-                            items: [
-                                { id: uuid(), name: "Chicken breast", unitPrice: 8.00 },
-                                { id: uuid(), name: "Rump steak", unitPrice: 11.00 },
-                                { id: uuid(), name: "Eggs", unitPrice: 3.50 }
-                            ]
-                        }
-                    ]
-                },
-                
-                cart: {
-                    id: uuid(),
-                    name: "Shopping Cart",
-                    user_name: "Lawrence",
-                    user_id: uuid(),
-                    items: []
-                }
-        };
-
-        this.updateCartQuantity = this.updateCartQuantity.bind(this);
-    };
-
-    updateCartQuantity( item ) {
-        const newItem = {
+    this.state = {
+      items: [],
+      retailer: {
+        name: "Woolworths",
+        suburb: "Parramatta",
+        logo:
+          "https://www.feedappeal.org.au/wp-content/uploads/2019/06/Woolworths_stacked_CMYK_Neg.png",
+        categories: [
+          {
             id: uuid(),
-            name: item.name,
-            unitPrice: item.unitPrice
-        };
+            name: "Bathroom Supplies",
+            items: [
+              { id: uuid(), name: "Toilet Paper", unitPrice: 3.0 },
+              { id: uuid(), name: "Toothpaste", unitPrice: 2.75 },
+              { id: uuid(), name: "Toothbrush", unitPrice: 2.5 },
+            ],
+          },
+          {
+            id: uuid(),
+            name: "Meat",
+            items: [
+              { id: uuid(), name: "Chicken breast", unitPrice: 8.0 },
+              { id: uuid(), name: "Rump steak", unitPrice: 11.0 },
+              { id: uuid(), name: "Eggs", unitPrice: 3.5 },
+            ],
+          },
+        ],
+      },
 
-        this.setState( previousState => {
-            let cart = {...previousState.cart};
-            cart.items.push(newItem);
-            return { cart };
-        } );
+      cart: {
+        id: uuid(),
+        name: "Shopping Cart",
+        user_name: "Lawrence",
+        user_id: uuid(),
+        items: [],
+      },
     };
 
-    render(){
-        const seller = this.state.retailer;
-        const categories = seller.categories;
-        return (
-            <Wrapper>
-                <StoresList>
-                    { <Retailer key={ seller.name } retailer={ seller } categories={ categories } update={ this.updateCartQuantity } /> }
-                </StoresList>
-                <SideCart cart_id={ this.state.cart.id } items={this.state.cart.items} />
-            </Wrapper>
+    this.updateCartQuantity = this.updateCartQuantity.bind(this);
+  }
+
+  async componentDidMount() {
+    // async await method
+    const items = await getAllItems();
+    const sellers = await getAllStores();
+
+    const seller = sellers.data.filter(
+      (s) => s.slug === queryString.parse(this.props.location.search).name
+    );
+
+    this.setState(
+      {
+        items: items.data,
+      },
+      () => {
+        console.log(
+          this.state.items,
+          queryString.parse(this.props.location.search),
+          seller
         );
+      }
+    );
+  }
+
+  updateCartQuantity(item) {
+    const newItem = {
+      id: uuid(),
+      name: item.name,
+      unitPrice: item.unitPrice,
     };
-};
+
+    this.setState((previousState) => {
+      let cart = { ...previousState.cart };
+      cart.items.push(newItem);
+      return { cart };
+    });
+  }
+
+  render() {
+    const seller = this.state.retailer;
+    const categories = seller.categories;
+    return (
+      <Wrapper>
+        <StoresList>
+          {
+            <Retailer
+              key={seller.name}
+              retailer={seller}
+              categories={categories}
+              update={this.updateCartQuantity}
+            />
+          }
+        </StoresList>
+        <SideCart cart_id={this.state.cart.id} items={this.state.cart.items} />
+      </Wrapper>
+    );
+  }
+}
 
 export default Orders;
