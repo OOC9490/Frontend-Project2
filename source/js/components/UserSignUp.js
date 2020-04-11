@@ -1,5 +1,22 @@
-import React, { Component } from 'react';
-import { Button, Form, FormGroup, Label, Input, FormText, Container, Col, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
+import {
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  FormText,
+  Container,
+  Col,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+} from "reactstrap";
+
+// import ajax functions
+import { registerUser } from "../ajaxCalls";
 
 class UserSignUp extends Component {
   constructor(props) {
@@ -7,9 +24,11 @@ class UserSignUp extends Component {
 
     this.state = {
       modalOpen: false,
+      name: "",
       email: "",
+      image: "",
       password: "",
-      suburb: ""
+      address: "",
     };
     this.toggle = this.toggle.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -17,61 +36,90 @@ class UserSignUp extends Component {
   }
 
   toggle() {
-      this.setState({
-        modalOpen: !this.state.modalOpen
-      });
-    }
+    this.setState({
+      modalOpen: !this.state.modalOpen,
+    });
+  }
 
-    handleSubmit(e) {
-     e.preventDefault();
+  handleSubmit(e) {
+    e.preventDefault();
 
-     const { email, password, suburb } = this.state;
-     let signup = {
-        email: email,
-        password: password,
-        suburb: suburb
-      };
+    const { name, email, password, address, image } = this.state;
+    let signup = {
+      name,
+      email,
+      password,
+      address,
+      image,
+    };
 
-      console.log("Submitted");
-      console.log(signup);
-     };
+    //console.log("Submitted");
+    //console.log(signup);
 
-     handleChange(e){
-       this.setState({
-         [e.target.name]: e.target.value
-       });
-   };
+    registerUser(signup).then((res) => {
+      if (res.success === true) {
+        // grab jwt
 
-    render() {
+        // forward to dash
+        this.props.history.push("/dashboard");
+      } else {
+        //
+      }
+    });
+  }
+
+  handleChange(e) {
+    //e.preventDefault()
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  }
+
+  render() {
     return (
-        <div>
-        <Button onClick={this.toggle} style={{ marginTop: '1em' }}>Signup</Button>
+      <div>
+        <Button onClick={this.toggle} style={{ marginTop: "1em" }}>
+          Signup
+        </Button>
         <Modal isOpen={this.state.modalOpen} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>Signup!!</ModalHeader>
           <ModalBody>
-          <Container>
+            <Container>
               <Form onSubmit={this.handleSubmit}>
+                <FormGroup mb={2}>
+                  <Label>Name</Label>
+                  <Input
+                    type="text"
+                    name="name"
+                    placeholder="Full Name"
+                    onChange={this.handleChange}
+                  />
+                </FormGroup>
                 <FormGroup mb={2}>
                   <Label>Email</Label>
                   <Input
-                  type="email"
-                  name="email"
-                  placeholder="uwais@ga.co"
-                  onChange={this.handleChange}
+                    type="email"
+                    name="email"
+                    placeholder="uwais@ga.co"
+                    onChange={this.handleChange}
                   />
                 </FormGroup>
                 <FormGroup>
-                  <Label>Suburb</Label>
+                  <Label>address</Label>
                   <Input
-                  type="text"
-                  name="suburb"
-                  placeholder="Macquarie Links"
-                  onChange={this.handleChange}
+                    type="text"
+                    name="address"
+                    placeholder="Macquarie Links"
+                    onChange={this.handleChange}
                   />
                 </FormGroup>
                 <FormGroup>
                   <Label>Image</Label>
-                  <Input type="text" />
+                  <Input
+                    type="text"
+                    name="image"
+                    onChange={this.handleChange}
+                  />
                 </FormGroup>
                 <FormGroup row>
                   <Label sm={2}>Image2</Label>
@@ -82,10 +130,10 @@ class UserSignUp extends Component {
                 <FormGroup>
                   <Label>Password</Label>
                   <Input
-                  type="password"
-                  name="password"
-                  placeholder="password"
-                  onChange={this.handleChange}
+                    type="password"
+                    name="password"
+                    placeholder="password"
+                    onChange={this.handleChange}
                   />
                 </FormGroup>
                 <FormGroup check row>
@@ -97,9 +145,9 @@ class UserSignUp extends Component {
             </Container>
           </ModalBody>
         </Modal>
-        </div>
+      </div>
     );
   }
 }
 
-export default UserSignUp;
+export default withRouter(UserSignUp);
