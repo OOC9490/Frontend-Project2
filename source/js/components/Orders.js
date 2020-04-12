@@ -4,6 +4,9 @@ import uuid from "react-uuid";
 import Retailer from "./Retailer";
 import SideCart from "./SideCart";
 
+//ramda functions
+import { prop, groupBy } from "ramda";
+
 // import ajax functions
 import { getAllItems, getAllStores, getAllCategories } from "../ajaxCalls";
 
@@ -34,27 +37,17 @@ class Orders extends Component {
     this.state = {
       items: [],
       retailer: {
-        name: "Woolworths",
-        suburb: "Parramatta",
-        logo:
-          "https://www.feedappeal.org.au/wp-content/uploads/2019/06/Woolworths_stacked_CMYK_Neg.png",
+        name: "Loading...",
+        suburb: "Loading...",
+        logo: "",
         categories: [
           {
             id: uuid(),
-            name: "Bathroom Supplies",
+            name: "Loading...",
             items: [
-              { id: uuid(), name: "Toilet Paper", unitPrice: 3.0 },
-              { id: uuid(), name: "Toothpaste", unitPrice: 2.75 },
-              { id: uuid(), name: "Toothbrush", unitPrice: 2.5 },
-            ],
-          },
-          {
-            id: uuid(),
-            name: "Meat",
-            items: [
-              { id: uuid(), name: "Chicken breast", unitPrice: 8.0 },
-              { id: uuid(), name: "Rump steak", unitPrice: 11.0 },
-              { id: uuid(), name: "Eggs", unitPrice: 3.5 },
+              { id: uuid(), name: "Loading...", unitPrice: 0 },
+              { id: uuid(), name: "Loading...", unitPrice: 0 },
+              { id: uuid(), name: "Loading...", unitPrice: 0 },
             ],
           },
         ],
@@ -89,40 +82,38 @@ class Orders extends Component {
       return category[0];
     };
 
-    // items seller sells
-    const selling = items.data
-      .filter((item) => item.seller === seller._id)
-      .map((item) => ({
+    // filter items the user is selling
+    const itemsStocked = items.data.filter(
+      (item) => item.seller === seller._id
+    );
+
+    // group items based on category
+    const itemsByCategory = Object.values(
+      groupBy(prop("category"), itemsStocked)
+    ).map((category) => {
+      return {
         id: uuid(),
-        name: categoryMatch(item.category).name,
-        items: items.data
-          .filter(
-            (i) =>
-              i.category === categoryMatch(item.category)._id &&
-              i.seller === seller._id
-          )
-          .map((i) => ({
+        name: categoryMatch(category[0].category).name,
+        items: category.map((item) => {
+          return {
             id: uuid(),
-            name: i.name,
-            unitPrice: parseFloat(i.price.$numberDecimal),
-          })),
-      }));
+            name: item.name,
+            unitPrice: parseFloat(item.price.$numberDecimal),
+          };
+        }),
+      };
+    });
 
     // construct state
-    this.setState(
-      {
-        items: items.data,
-        retailer: {
-          name: seller.name,
-          suburb: seller.location.city,
-          logo: seller.image,
-          categories: selling,
-        },
+    this.setState({
+      items: items.data,
+      retailer: {
+        name: seller.name,
+        suburb: seller.location.city,
+        logo: seller.image,
+        categories: itemsByCategory,
       },
-      () => {
-        console.log(this.state.items, this.state.retailer, seller, categories);
-      }
-    );
+    });
   }
 
   updateCartQuantity(item) {

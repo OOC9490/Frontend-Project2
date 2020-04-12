@@ -34,3 +34,11 @@ export async function registerUser(obj) {
 
   return response.data;
 }
+// login user
+export async function loginUser(obj) {
+  const response = await axios.post(AJAX_URL + `/login`, obj, {
+    "Content-Type": "application/json",
+  });
+
+  return response.data;
+}
