@@ -11,8 +11,11 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
+  Alert,
   ModalFooter,
 } from "reactstrap";
+
+import { withRouter } from "react-router-dom";
 import { loginUser } from "../ajaxCalls";
 
 class LoginUser extends Component {
@@ -21,6 +24,8 @@ class LoginUser extends Component {
 
     this.state = {
       modalOpen: false,
+      logInError: false,
+      errorMsg: "",
       email: "",
       password: "",
     };
@@ -41,21 +46,31 @@ class LoginUser extends Component {
     };
 
     console.log("Submitted");
-    //console.log(user);
 
-    localStorage.setItem("estoreUserCreds", JSON.stringify(user));
-    let userDeets = localStorage.getItem("estoreUserCreds");
-    console.log(JSON.parse(userDeets));
-    // loginUser(user).then(res=> {
-    //   if (res.success === true) {
-    //     // grab jwt
+    loginUser(user)
+      .then(({ success, token, userid }) => {
+        if (success === true) {
+          // grab jwt
+          //store user credentials on successful login
+          localStorage.setItem(
+            "estoreUserCreds",
+            JSON.stringify({ token, userid })
+          );
 
-    //     // forward to dash
-    //     //this.props.history.push("/dashboard");
-    //   } else {
-    //     //
-    //   }
-    // })
+          //retrieval sample
+          //let userDeets = localStorage.getItem("estoreUserCreds");
+          //console.log(JSON.parse(userDeets));
+
+          //forward to dash
+          this.props.history.push("/dashboard");
+        }
+      })
+      .catch((err) => {
+        this.setState({
+          logInError: true,
+          errorMsg: err.response.data.message,
+        });
+      });
   }
 
   handleChange(e) {
@@ -100,6 +115,10 @@ class LoginUser extends Component {
                   />
                 </FormGroup>
                 <FormGroup check row>
+                  {this.state.logInError === true ? (
+                    <Alert color="danger">{this.state.errorMsg}</Alert>
+                  ) : null}
+
                   <Col>
                     <Button size="lg">Submit</Button>
                   </Col>
@@ -113,4 +132,4 @@ class LoginUser extends Component {
   }
 }
 
-export default LoginUser;
+export default withRouter(LoginUser);

@@ -12,6 +12,7 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
+  Alert,
   ModalFooter,
 } from "reactstrap";
 
@@ -76,6 +77,7 @@ class UserSignUp extends Component {
   }
 
   render() {
+    const { name, email, password, address } = this.state;
     return (
       <div>
         <Button onClick={this.toggle} style={{ marginTop: "1em" }}>
@@ -137,9 +139,18 @@ class UserSignUp extends Component {
                   />
                 </FormGroup>
                 <FormGroup check row>
-                  <Col sm={{ size: 20, offset: 5 }}>
-                    <Button bsSize="lg">Submit</Button>
-                  </Col>
+                  {name.length > 0 &&
+                  email.length > 0 &&
+                  password.length > 7 &&
+                  address.length > 0 ? (
+                    <Col sm={{ size: 20, offset: 5 }}>
+                      <Button bsSize="lg">Submit</Button>
+                    </Col>
+                  ) : (
+                    <Alert color="warning">
+                      All required fields have not yet been filled out.
+                    </Alert>
+                  )}
                 </FormGroup>
               </Form>
             </Container>
