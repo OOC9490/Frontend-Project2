@@ -14,9 +14,10 @@ const PlainTitle = styled.div`
     align-items: center;
 `;
 const Logo = styled.img`
-    max-height: 50px;
-    max-width: 50px;
-`
+    max-height: 80px;
+    max-width: 80px;
+    border-radius 1.5em;
+`;
 
 
 class Retailer extends Component {
