@@ -61,7 +61,9 @@ class LoginUser extends Component {
           //let userDeets = localStorage.getItem("estoreUserCreds");
           //console.log(JSON.parse(userDeets));
 
-          //forward to dash
+          //close modal, forward to dash
+          this.toggle();
+          this.props.updateUser();
           this.props.history.push("/dashboard");
         }
       })

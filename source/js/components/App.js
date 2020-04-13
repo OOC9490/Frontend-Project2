@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import ReactDOM from "react-dom";
 
 import { HashRouter as Router, Route } from "react-router-dom";
@@ -33,19 +33,69 @@ const Footer = styled.div`
   font-size: 1.25em;
 `;
 
-function App() {
-  return (
-    <Router>
-      <AppWrapper>
-        <Navigation />
-        <Route exact path="/" component={Home} />
-        <Route path="/dashboard/" exact component={DashBoard} />
-        <Route path="/search/" component={Search} />
-        <Route path="/dashboard/:orders" component={Orders} />
-        <Footer>We hope you enjoy shopping!</Footer>
-      </AppWrapper>
-    </Router>
-  );
+class App extends Component {
+  constructor(props){
+    super(props);
+
+    this.state = {
+      isAuth: false,
+      currentUser: "",
+      token: ""
+    };
+
+    this.detectLogInOut = this.detectLogInOut.bind(this);
+  };
+
+  componentDidMount() {
+    const userLoggedIn = localStorage.getItem("estoreUserCreds");
+    if ( userLoggedIn ){
+      const { userid, token } = JSON.parse(userLoggedIn);
+      this.setState({
+        isAuth: true,
+        currentUser: userid,
+        token: token
+      });
+    }else{
+      this.setState({
+        isAuth: false,
+        currentUser: "",
+        token: ""
+      });
+    };
+  };
+
+  detectLogInOut(){
+    const userLoggedIn = localStorage.getItem("estoreUserCreds");
+    if ( userLoggedIn ){
+      const { userid, token } = JSON.parse(userLoggedIn);
+      this.setState({
+        isAuth: true,
+        currentUser: userid,
+        token: token
+      });
+    }else{
+      this.setState({
+        isAuth: false,
+        currentUser: "",
+        token: ""
+      });
+    };
+  };
+
+  render(){
+    return (
+      <Router>
+        <AppWrapper>
+          <Navigation />
+          <Route exact path="/" render={(props) => <Home {...props} userDetails={this.state} updateUser={ this.detectLogInOut } />} />
+          <Route path="/dashboard/" exact render={(props) => <DashBoard {...props} userDetails={this.state} />} />
+          <Route path="/search/" render={(props) => <Search {...props} userDetails={this.state} />} />
+          <Route path="/dashboard/:orders" render={(props) => <Orders {...props} userDetails={this.state} />} />
+          <Footer>We hope you enjoy shopping!</Footer>
+        </AppWrapper>
+      </Router>
+    );
+  }
 }
 
 export default hot(module)(App);

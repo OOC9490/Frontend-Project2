@@ -43,6 +43,14 @@ export async function loginUser(obj) {
 
   return response.data;
 }
+
+// get current user
+export async function checkUser() {
+  const response = await axios.get(AJAX_URL + `/users`);
+
+  return response.data;
+}
+
 // search for an item
 export async function searchItem(term) {
   const response = await axios.get(AJAX_URL + `/items/?slug=${term}`);

@@ -26,13 +26,8 @@ class Item extends Component {
                 <ItemDetails>
                     <strong>{ this.props.item.name }</strong>
                     <SmallDetails><strong>Price: </strong>{ `$${this.props.item.unitPrice.toFixed(2)}` }</SmallDetails>
-<<<<<<< HEAD
-                    { this.props.isCart ? 
-                        <Button 
-=======
                     { this.props.isCart ?
                         <Button
->>>>>>> 9d1ca2572bed9e8224c7fa40dd0ad09e71f2bdc8
                             color="danger"
                             onClick={ () => this.props.remove(this.props.item) }>
                             Remove from Cart

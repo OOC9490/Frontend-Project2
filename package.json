@@ -67,6 +67,7 @@
     "react-router-dom": "^5.1.2",
     "react-uuid": "^1.0.2",
     "reactstrap": "^8.4.1",
-    "slugify": "^1.4.0"
+    "slugify": "^1.4.0",
+    "underscore": "^1.10.2"
   }
 }

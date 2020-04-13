@@ -119,16 +119,10 @@ class Orders extends Component {
 
   addToCart({ name, unitPrice, _id }) {
     const newItem = {
-<<<<<<< HEAD
 
         id: uuid(),
         name,
         unitPrice
-=======
-      id: _id,
-      name: name,
-      unitPrice: unitPrice,
->>>>>>> 9d1ca2572bed9e8224c7fa40dd0ad09e71f2bdc8
     };
 
     const newItems = [...this.state.cart.items, newItem];
@@ -159,11 +153,12 @@ class Orders extends Component {
             />
           }
         </StoresList>
-        <SideCart
+        { this.props.userDetails.isAuth ? <SideCart
           cart_id={this.state.cart.id}
           items={this.state.cart.items}
           remove={this.removeFromCart}
-        />
+          retailer={seller}
+        /> : null }
       </Wrapper>
     );
   }

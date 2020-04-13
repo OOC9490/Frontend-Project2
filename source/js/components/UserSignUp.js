@@ -17,7 +17,7 @@ import {
 } from "reactstrap";
 
 // import ajax functions
-import { registerUser } from "../ajaxCalls";
+import { registerUser,loginUser } from "../ajaxCalls";
 
 class UserSignUp extends Component {
   constructor(props) {
@@ -54,18 +54,27 @@ class UserSignUp extends Component {
       image,
     };
 
-    //console.log("Submitted");
-    //console.log(signup);
-
     registerUser(signup).then((res) => {
       if (res.success === true) {
-        // grab jwt
+        // log user in
+        const { email, password } = signup;
+        const user = { email, password }
+        loginUser(user)
+          .then(({ success, token, userid }) => {
+            if (success === true) {
+              // grab jwt
+              //store user credentials on successful login
+              localStorage.setItem(
+                "estoreUserCreds",
+                JSON.stringify({ token, userid })
+              );
+            }
+          });
 
         // forward to dash
+        this.props.updateUser();
         this.props.history.push("/dashboard");
-      } else {
-        //
-      }
+      };
     });
   }
 

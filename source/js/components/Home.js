@@ -2,13 +2,16 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import LoginUser from './LoginUser';
 import UserSignUp from './UserSignUp';
+import Logout from './Logout';
 import styled from '@emotion/styled';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import { checkUser } from '../ajaxCalls'; 
 import {
     Row,
     Col
 } from 'reactstrap';
+import { prop } from 'ramda';
+import { filter } from 'underscore';
 
 const Jumbotron = styled.div`
   background-color: lightgray;
@@ -28,16 +31,44 @@ const Wrapper = styled.div`
 `;
 
 class Home extends Component {
+  constructor(props){
+    super(props);
+
+    this.state = {}
+
+    this.setUser = this.setUser.bind(this);
+  };
+
+  async setUser(userId, isAuth){
+    if ( isAuth ){
+      const user = await checkUser();
+      const currUser = filter(user.data, (user) => user._id === userId )[0];
+      this.setState({...currUser});
+    } else {
+      return;
+    }
+  }
+
   render() {
+    const { currentUser, isAuth, token } = this.props.userDetails;
+    this.setUser(currentUser, isAuth);
+    const guestLinks = (
+      <div>
+        <LoginUser updateUser={() => this.props.updateUser() } />
+        <UserSignUp updateUser={() => this.props.updateUser() } />
+      </div>
+    );
+    
+    const authLinks = <Logout updateUser={() => this.props.updateUser() }/>;
+
     return (
           <Jumbotron>
                 <Row>
                     <Col className="text-center">
                       <Wrapper>
-                        <h1>Welcome</h1>
+                        <h1>Welcome, { isAuth ? this.state.name : "Guest"} </h1>
                         <img src="https://i.imgur.com/8UhPnoW.png" style={{ marginBottom: "2em", width: "15vh" }}/>
-                          <LoginUser />
-                          <UserSignUp />
+                          { isAuth ? authLinks : guestLinks }
                       </Wrapper>
                     </Col>
                 </Row>
