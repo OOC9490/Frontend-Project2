@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styled from "@emotion/styled";
 import { jsx, css, Global, ClassNames } from "@emotion/core";
-import { ListGroup, ListGroupItem, Button, InputGroup, InputGroupText, InputGroupAddon, Input, Form } from "reactstrap";
+import { ListGroup, ListGroupItem } from "reactstrap";
 import slugify from "slugify";
 
 // import ajax functions
@@ -11,12 +11,8 @@ const Container = css`
   margin: 0 auto;
   min-width: 80vw;
   height: 60vh;
-
   border-radius: 25px;
-  border: 1px solid #fff;
-  background-color: #fff;
-  box-shadow: 0 0 20px #bdbdbd;
-
+  border: 1px solid #bdbdbd;
   padding: 1em 2em;
 `;
 
@@ -72,19 +68,15 @@ class Search extends Component {
   render() {
     return (
       <div css={Container}>
-        <Form inline css={css``} onSubmit={this.itemLookUp}>
-          <InputGroup>
-            <InputGroupAddon addonType="prepend">
-              <InputGroupText>Search for an Item!</InputGroupText>
-            </InputGroupAddon>
-            <Input
-              type="text"
-              name="itemsearch"
-              ref={(node) => (this.input = node)}
-            />
-          </InputGroup>
-          <Button type="submit">Search</Button>
-        </Form>
+        Search for an Item!
+        <form css={css``} onSubmit={this.itemLookUp}>
+          <input
+            type="text"
+            name="itemsearch"
+            ref={(node) => (this.input = node)}
+          />
+          <button type="submit">Search</button>
+        </form>
         <div>
           <ListGroup
             css={css`
@@ -105,18 +97,14 @@ class Search extends Component {
                 ))
               : null}
           </ListGroup>
-          <Form inline css={css``} onSubmit={this.sellerLookUp}>
-            <InputGroup>
-              <InputGroupAddon addonType="prepend">
-                <InputGroupText>Search for a nearby Seller! Enter your postcode:</InputGroupText>
-              </InputGroupAddon>
-            <Input
+          Search for a nearby Seller! Enter your postcode:
+          <form css={css``} onSubmit={this.sellerLookUp}>
+            <input
               type="text"
               name="postcode"
               ref={(postcode) => (this.location = postcode)}
             />
-            </InputGroup>
-            <Button type="submit">Search</Button>
+            <button type="submit">Search</button>
             <ListGroup
               css={css`
                 width: 70%;
@@ -135,7 +123,7 @@ class Search extends Component {
                   )
                 : null}
             </ListGroup>
-          </Form>
+          </form>
         </div>
       </div>
     );
