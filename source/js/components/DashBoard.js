@@ -43,7 +43,7 @@ class DashBoard extends Component {
                   style={{ margin: 20, borderRadius: 15 }}
                 >
                   <CardImg
-                    style={{ borderRadius: 15, height: 300, opacity: 0.75}}
+                    style={{ borderRadius: 15, height: 300, opacity: 0.7}}
                     src={
                       image !== ""
                         ? image
