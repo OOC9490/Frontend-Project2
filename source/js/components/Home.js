@@ -16,6 +16,15 @@ const Jumbotron = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  background-image: url('https://i.imgur.com/kxAIyoq.jpg');
+  background-size: cover;
+`;
+
+const Wrapper = styled.div`
+  background: linear-gradient(135deg, rgba(44,50,55,0.8) 22%, rgba(82,94,103,0.8) 100%);
+  padding: 5em;
+  border-radius: 1.5em;
+  color: white;
 `;
 
 class Home extends Component {
@@ -24,9 +33,12 @@ class Home extends Component {
           <Jumbotron>
                 <Row>
                     <Col className="text-center">
-                        <h1>WELCOME</h1>
+                      <Wrapper>
+                        <h1>Welcome</h1>
+                        <img src="https://i.imgur.com/8UhPnoW.png" style={{ marginBottom: "2em", width: "15vh" }}/>
                           <LoginUser />
                           <UserSignUp />
+                      </Wrapper>
                     </Col>
                 </Row>
           </Jumbotron>

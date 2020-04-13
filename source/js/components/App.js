@@ -8,6 +8,7 @@ import Navigation from "./Navigation";
 import DashBoard from "./DashBoard";
 import UserSignUp from "./UserSignUp";
 import Orders from "./Orders";
+import Search from "./Search";
 import styled from "@emotion/styled";
 
 // for development only
@@ -16,6 +17,7 @@ import { hot } from "react-hot-loader";
 const AppWrapper = styled.div`
   height: 100vh;
   display: grid;
+  background-image: url('https://i.imgur.com/2bWntlW.png');
   grid-template:
     [row1-start] "header" 50px [row1-end]
     [row2-start] "main" auto[row2-end]
@@ -34,10 +36,11 @@ const Footer = styled.div`
 function App() {
   return (
     <Router>
-      <AppWrapper >
+      <AppWrapper>
         <Navigation />
         <Route exact path="/" component={Home} />
         <Route path="/dashboard/" exact component={DashBoard} />
+        <Route path="/search/" component={Search} />
         <Route path="/dashboard/:orders" component={Orders} />
         <Footer>We hope you enjoy shopping!</Footer>
       </AppWrapper>

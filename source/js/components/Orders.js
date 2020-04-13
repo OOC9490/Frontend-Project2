@@ -93,11 +93,11 @@ class Orders extends Component {
       groupBy(prop("category"), itemsStocked)
     ).map((category) => {
       return {
-        id: uuid(),
+        id: category._id,
         name: categoryMatch(category[0].category).name,
         items: category.map((item) => {
           return {
-            id: uuid(),
+            id: item._id,
             name: item.name,
             unitPrice: parseFloat(item.price.$numberDecimal),
           };
@@ -117,26 +117,32 @@ class Orders extends Component {
     });
   }
 
-  addToCart( { name, unitPrice } ) {
+  addToCart({ name, unitPrice, _id }) {
     const newItem = {
+<<<<<<< HEAD
 
         id: uuid(),
         name,
         unitPrice
+=======
+      id: _id,
+      name: name,
+      unitPrice: unitPrice,
+>>>>>>> 9d1ca2572bed9e8224c7fa40dd0ad09e71f2bdc8
     };
 
-    const newItems = [...this.state.cart.items, newItem ];
+    const newItems = [...this.state.cart.items, newItem];
     this.setState({ cart: { ...this.state.cart, items: newItems } });
-  };
+  }
 
-  removeFromCart( { id }){
+  removeFromCart({ id }) {
     const itemList = [...this.state.cart.items];
-    const index = itemList.findIndex(item => item.id === id);
-    if ( index !== -1) {
-        itemList.splice(index, 1);
-        this.setState({ cart: {...this.state.cart, items: itemList } } );
-    };
-  };
+    const index = itemList.findIndex((item) => item.id === id);
+    if (index !== -1) {
+      itemList.splice(index, 1);
+      this.setState({ cart: { ...this.state.cart, items: itemList } });
+    }
+  }
 
   render() {
     const seller = this.state.retailer;
@@ -153,7 +159,11 @@ class Orders extends Component {
             />
           }
         </StoresList>
-        <SideCart cart_id={this.state.cart.id} items={this.state.cart.items} remove={ this.removeFromCart } />
+        <SideCart
+          cart_id={this.state.cart.id}
+          items={this.state.cart.items}
+          remove={this.removeFromCart}
+        />
       </Wrapper>
     );
   }
