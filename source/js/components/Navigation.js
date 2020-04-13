@@ -51,11 +51,6 @@ class Navigation extends Component {
               <NavLink>Stores</NavLink>
             </Link>
           </NavItem>
-          {/* <NavItem>
-            <Link to="/orders">
-              <NavLink>Cart</NavLink>
-            </Link>
-          </NavItem> */}
         </Nav>
       </Navbar>
     );

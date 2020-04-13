@@ -152,6 +152,7 @@ class Orders extends Component {
               retailer={seller}
               categories={categories}
               update={this.addToCart}
+              isAuth={this.props.userDetails.isAuth}
             />
           }
         </StoresList>

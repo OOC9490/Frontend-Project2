@@ -28,7 +28,7 @@ class Retailer extends Component {
                     <Logo src={ this.props.retailer.logo } />
                     <h3>{ `${this.props.retailer.name}, ${this.props.retailer.suburb}` }</h3>
                 </PlainTitle>
-                { this.props.categories.map( (category) => <Category key={ category.name } category={ category } update={ this.props.update } />)}
+                { this.props.categories.map( (category) => <Category key={ category.name } category={ category } update={ this.props.update } isAuth={this.props.isAuth} />)}
             </Plain>
         );
     }

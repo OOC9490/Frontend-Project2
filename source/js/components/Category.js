@@ -42,7 +42,7 @@ class Category extends Component {
                     <Button color="primary" onClick={this.toggle}>Show Items</Button>
                 </PlainTitle>
                 <Collapse isOpen={ this.state.isOpen }>
-                    { this.props.category.items.map( (item, index) => <Item key={ item.id} item={ item } index={index} isCart={false} update={ this.props.update } />)}
+                    { this.props.category.items.map( (item, index) => <Item key={ item.id} item={ item } index={index} isCart={false} update={ this.props.update } isAuth={this.props.isAuth} />)}
                 </Collapse>
             </Plain>
         );
