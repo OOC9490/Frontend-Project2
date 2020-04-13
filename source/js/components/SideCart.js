@@ -32,7 +32,7 @@ class SideCart extends Component {
                     { this.props.items.length === 0 ? "Your cart is empty! (add items to start shopping!)"  : this.props.items.map((item) => <Item key={ item.id } item={ item } isCart={true} remove={this.props.remove} />) }
                     { this.props.items.length !== 0 ? 
                     <PriceCheckOut>
-                        <Alert color="info">Total from {this.props.retailer.name}: ${reduce(this.props.items, (total, item) => total + item.unitPrice, 0)}</Alert>
+                        <Alert color="info">Total from {this.props.retailer.name}: ${reduce(this.props.items, (total, item) => total + item.unitPrice, 0).toFixed(2)}</Alert>
                         <Button color="success">Checkout</Button>
                     </PriceCheckOut>
                     : null}
