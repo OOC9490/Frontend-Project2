@@ -34,6 +34,7 @@ class Home extends Component {
                 <Row>
                     <Col className="text-center">
                       <Wrapper>
+                        <h1>Welcome</h1>
                         <img src="https://i.imgur.com/8UhPnoW.png" style={{ marginBottom: "2em", width: "15vh" }}/>
                           <LoginUser />
                           <UserSignUp />
