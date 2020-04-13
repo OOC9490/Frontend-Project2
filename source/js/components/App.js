@@ -16,6 +16,7 @@ import { hot } from "react-hot-loader";
 const AppWrapper = styled.div`
   height: 100vh;
   display: grid;
+  background-image: url('https://i.imgur.com/2bWntlW.png');
   grid-template:
     [row1-start] "header" 50px [row1-end]
     [row2-start] "main" auto[row2-end]

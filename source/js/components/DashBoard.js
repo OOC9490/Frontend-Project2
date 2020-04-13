@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import styled from '@emotion/styled';
 import {
   Card,
   CardTitle,
@@ -12,6 +13,12 @@ import {
 } from "reactstrap";
 
 import { getAllStores } from "../ajaxCalls";
+
+const TitleBg = styled.div`
+  background-color: rgba(255,255,255,0.5);
+  border-radius: 2px;
+  padding: 5px;
+`;
 
 class DashBoard extends Component {
   state = {
@@ -40,7 +47,7 @@ class DashBoard extends Component {
             {this.state.stores.map(({ name, image, slug }, i) => (
               <Col sm="3">
                 <Card inverse
-                  style={{ margin: 20, borderRadius: 15 }}
+                  style={{ margin: 20, borderRadius: 15, boxShadow: "0 0 10px lightgray" }}
                 >
                   <CardImg
                     style={{ borderRadius: 15, height: 300, opacity: 0.7}}
@@ -52,17 +59,19 @@ class DashBoard extends Component {
                     alt="Card image cap"
                   />
                   <CardImgOverlay>
+                  <TitleBg>
                     <CardTitle
                       key={i}
                       style={{textAlign: "center"}}
                     >
                       <Link
-                        style={{ fontSize: 40, color:"#000"}}
+                        style={{ fontSize: 30, color:"#000"}}
                         to={`/dashboard/retailer?name=${slug}`}
                       >
                         {name}
                       </Link>
                     </CardTitle>
+                    </TitleBg>
                   </CardImgOverlay>
                 </Card>
               </Col>
