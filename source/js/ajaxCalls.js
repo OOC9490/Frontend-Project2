@@ -7,8 +7,8 @@ import axios from "axios";
 const AJAX_URL = `https://vast-tor-12475.herokuapp.com`;
 
 // Get stores
-export async function getAllStores() {
-  const response = await axios.get(AJAX_URL + `/sellers`);
+export async function getAllStores(sellerid = "") {
+  const response = await axios.get(AJAX_URL + `/sellers${sellerid}`);
 
   return response.data;
 }
@@ -40,6 +40,20 @@ export async function loginUser(obj) {
   const response = await axios.post(AJAX_URL + `/login`, obj, {
     "Content-Type": "application/json",
   });
+
+  return response.data;
+}
+// search for an item
+export async function searchItem(term) {
+  const response = await axios.get(AJAX_URL + `/items/?slug=${term}`);
+
+  return response.data;
+}
+// search for an item
+export async function findLocalSellers(postcode) {
+  const response = await axios.get(
+    AJAX_URL + "/sellers/local/" + postcode + "/5"
+  );
 
   return response.data;
 }

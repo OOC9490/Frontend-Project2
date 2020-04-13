@@ -80,7 +80,12 @@ class UserSignUp extends Component {
     const { name, email, password, address } = this.state;
     return (
       <div>
-        <Button color="success" size="lg" onClick={this.toggle} style={{ marginTop: "1em" }}>
+        <Button
+          color="success"
+          size="lg"
+          onClick={this.toggle}
+          style={{ marginTop: "1em" }}
+        >
           Register
         </Button>
         <Modal isOpen={this.state.modalOpen} toggle={this.toggle}>
@@ -130,7 +135,7 @@ class UserSignUp extends Component {
                   </Col>
                 </FormGroup>
                 <FormGroup>
-                  <Label>Password</Label>
+                  <Label>Password (Minimum 8 characters in length)</Label>
                   <Input
                     type="password"
                     name="password"
