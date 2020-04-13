@@ -92,11 +92,11 @@ class Orders extends Component {
       groupBy(prop("category"), itemsStocked)
     ).map((category) => {
       return {
-        id: uuid(),
+        id: category._id,
         name: categoryMatch(category[0].category).name,
         items: category.map((item) => {
           return {
-            id: uuid(),
+            id: item._id,
             name: item.name,
             unitPrice: parseFloat(item.price.$numberDecimal),
           };
@@ -118,7 +118,7 @@ class Orders extends Component {
 
   updateCartQuantity(item) {
     const newItem = {
-      id: uuid(),
+      id: item._id,
       name: item.name,
       unitPrice: item.unitPrice,
     };
