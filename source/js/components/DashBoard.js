@@ -39,9 +39,11 @@ class DashBoard extends Component {
           <CardDeck>
             {this.state.stores.map(({ name, image, slug }, i) => (
               <Col sm="3">
-                <Card inverse style={{ margin: 20, borderRadius: 15 }}>
+                <Card inverse 
+                  style={{ margin: 20, borderRadius: 15 }}
+                >
                   <CardImg
-                    style={{ borderRadius: 15 }}
+                    style={{ borderRadius: 15, height: 300, opacity: 0.75}}
                     src={
                       image !== ""
                         ? image
@@ -50,9 +52,12 @@ class DashBoard extends Component {
                     alt="Card image cap"
                   />
                   <CardImgOverlay>
-                    <CardTitle key={i}>
+                    <CardTitle 
+                      key={i}
+                      style={{textAlign: "center"}}
+                    >
                       <Link
-                        style={{ fontSize: 40 }}
+                        style={{ fontSize: 40, color:"#000"}}
                         to={`/dashboard/retailer?name=${slug}`}
                       >
                         {name}

@@ -62,7 +62,8 @@ class Orders extends Component {
       },
     };
 
-    this.updateCartQuantity = this.updateCartQuantity.bind(this);
+    this.addToCart = this.addToCart.bind(this);
+    this.removeFromCart = this.removeFromCart.bind(this);
   }
 
   async componentDidMount() {
@@ -116,19 +117,25 @@ class Orders extends Component {
     });
   }
 
-  updateCartQuantity(item) {
+  addToCart( { name, unitPrice } ) {
     const newItem = {
-      id: uuid(),
-      name: item.name,
-      unitPrice: item.unitPrice,
+        id: uuid(),
+        name,
+        unitPrice
     };
 
-    this.setState((previousState) => {
-      let cart = { ...previousState.cart };
-      cart.items.push(newItem);
-      return { cart };
-    });
-  }
+    const newItems = [...this.state.cart.items, newItem ];
+    this.setState({ cart: { ...this.state.cart, items: newItems } });
+  };
+
+  removeFromCart( { id }){
+    const itemList = [...this.state.cart.items];
+    const index = itemList.findIndex(item => item.id === id);
+    if ( index !== -1) {
+        itemList.splice(index, 1);
+        this.setState({ cart: {...this.state.cart, items: itemList } } );
+    };
+  };
 
   render() {
     const seller = this.state.retailer;
@@ -141,11 +148,11 @@ class Orders extends Component {
               key={seller.name}
               retailer={seller}
               categories={categories}
-              update={this.updateCartQuantity}
+              update={this.addToCart}
             />
           }
         </StoresList>
-        <SideCart cart_id={this.state.cart.id} items={this.state.cart.items} />
+        <SideCart cart_id={this.state.cart.id} items={this.state.cart.items} remove={ this.removeFromCart } />
       </Wrapper>
     );
   }
