@@ -8,6 +8,7 @@ import Navigation from "./Navigation";
 import DashBoard from "./DashBoard";
 import UserSignUp from "./UserSignUp";
 import Orders from "./Orders";
+import Search from "./Search";
 import styled from "@emotion/styled";
 
 // for development only
@@ -34,10 +35,11 @@ const Footer = styled.div`
 function App() {
   return (
     <Router>
-      <AppWrapper >
+      <AppWrapper>
         <Navigation />
         <Route exact path="/" component={Home} />
         <Route path="/dashboard/" exact component={DashBoard} />
+        <Route path="/search/" component={Search} />
         <Route path="/dashboard/:orders" component={Orders} />
         <Footer>We hope you enjoy shopping!</Footer>
       </AppWrapper>
