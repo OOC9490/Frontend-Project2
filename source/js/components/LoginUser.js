@@ -88,7 +88,7 @@ class LoginUser extends Component {
   render() {
     return (
       <div>
-        <Button onClick={this.toggle} className="mb-3">
+        <Button color="success" size="lg" onClick={this.toggle} className="mb-3 mt-4">
           Login
         </Button>
         <Modal isOpen={this.state.modalOpen} toggle={this.toggle}>
