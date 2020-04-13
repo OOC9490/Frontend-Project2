@@ -26,9 +26,6 @@ class Item extends Component {
                 <ItemDetails>
                     <strong>{ this.props.item.name }</strong>
                     <SmallDetails><strong>Price: </strong>{ `$${this.props.item.unitPrice.toFixed(2)}` }</SmallDetails>
-<<<<<<< HEAD
-                    { this.props.isCart ? <Button color="danger" onClick={ () => this.props.remove(this.props.item) }>Remove from Cart</Button> : <Button color="success" onClick={ () => this.props.update(this.props.item) }>Add to Cart</Button>}
-=======
                     { this.props.isCart ? 
                         <Button 
                             color="danger"
@@ -40,7 +37,6 @@ class Item extends Component {
                         onClick={ () => this.props.update(this.props.item) }
                     >Add to Cart
                     </Button>}
->>>>>>> z-ajax
                 </ItemDetails>
         );
     }
