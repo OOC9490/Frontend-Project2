@@ -45,7 +45,7 @@ class DashBoard extends Component {
         <Container fluid>
           <CardDeck>
             {this.state.stores.map(({ name, image, slug }, i) => (
-              <Col sm="3">
+              <Col sm="3" key={i}>
                 <Card inverse
                   style={{ margin: 20, borderRadius: 15, boxShadow: "0 0 10px lightgray" }}
                 >
@@ -61,7 +61,6 @@ class DashBoard extends Component {
                   <CardImgOverlay>
                   <TitleBg>
                     <CardTitle
-                      key={i}
                       style={{textAlign: "center"}}
                     >
                       <Link
