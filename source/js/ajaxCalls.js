@@ -26,6 +26,7 @@ export async function getAllCategories() {
 
   return response.data;
 }
+
 // signup user, add to db
 export async function registerUser(obj) {
   const response = await axios.post(AJAX_URL + `/users`, obj, {

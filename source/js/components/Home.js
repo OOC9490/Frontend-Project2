@@ -6,41 +6,21 @@ import styled from '@emotion/styled';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import {
-    Collapse,
-    Navbar,
-    NavbarToggler,
-    NavbarBrand,
-    Nav,
-    NavItem,
-    NavLink,
-    Container,
     Row,
-    Col,
-    Jumbotron,
-    Button
+    Col
 } from 'reactstrap';
 
-// const ButtonEmotion = styled.button`
-//   padding: 15px;
-//   background-color: hotpink;
-//   border: 2px solid hotpink;
-//   margin: 5px;
-//   font-size: 17px;
-//   border-radius: 4px;
-//   color: black;
-//   font-weight: bold;
-//   &:hover {
-//     background-color: white;
-//     color: hotpink;
-//     border: 2px solid hotpink;
-//   }
-// `
+const Jumbotron = styled.div`
+  background-color: lightgray;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
 class Home extends Component {
   render() {
     return (
-      <div>
-        <div>
           <Jumbotron>
                 <Row>
                     <Col className="text-center">
@@ -50,8 +30,6 @@ class Home extends Component {
                     </Col>
                 </Row>
           </Jumbotron>
-        </div>
-      </div>
     );
   }
 }
