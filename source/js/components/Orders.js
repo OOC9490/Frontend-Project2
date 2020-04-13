@@ -3,6 +3,8 @@ import styled from "@emotion/styled";
 import uuid from "react-uuid";
 import Retailer from "./Retailer";
 import SideCart from "./SideCart";
+import { Alert } from "reactstrap";
+import { Link } from "react-router-dom";
 
 //ramda functions
 import { prop, groupBy } from "ramda";
@@ -153,12 +155,16 @@ class Orders extends Component {
             />
           }
         </StoresList>
-        { this.props.userDetails.isAuth ? <SideCart
+        { this.props.userDetails.isAuth ? 
+        <SideCart
           cart_id={this.state.cart.id}
           items={this.state.cart.items}
           remove={this.removeFromCart}
           retailer={seller}
-        /> : null }
+        /> :
+        <Alert color="info" style={{margin: 0, display: "flex", alignItems: "center"}}>
+           Want to start shopping? Login or sign up<Link style={{marginLeft: 5}} to={`/`}>here</Link>! 
+        </Alert> }
       </Wrapper>
     );
   }
