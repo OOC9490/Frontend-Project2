@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import { css } from "@emotion/core";
 import {
-    Collapse,
     Navbar,
-    NavbarToggler,
     NavbarBrand,
     Nav,
     NavItem,
@@ -33,11 +31,8 @@ class Navigation extends Component {
 
     render() {
         return (
-            <div>
-                <Navbar color="light" light expand="md" >
-                    <Link to="/"><NavbarBrand>eStore</NavbarBrand></Link>
-                    <NavbarToggler onClick={this.toggle} />
-                    <Collapse isOpen={this.state.isOpen} navbar>
+                <Navbar color="dark" dark expand="md">
+                    <Link to="/"><NavbarBrand>Delivree</NavbarBrand></Link>
                         <Nav className="ml-auto" navbar>
                             <NavItem>
                                 <Link to="/" ><NavLink>Home</NavLink></Link>
@@ -49,9 +44,7 @@ class Navigation extends Component {
                                 <Link to="/orders" ><NavLink>Cart</NavLink></Link>
                             </NavItem>
                         </Nav>
-                    </Collapse>
                 </Navbar>
-            </div>
         );
     }
 }
