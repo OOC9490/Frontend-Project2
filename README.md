@@ -1,4 +1,4 @@
-# **Delivree** !<img src="https://i.imgur.com/8UhPnoW.png" width="50">
+# <img src="readme_logo.png" width="40"> **Delivree**
 An e-commerce website allowing customers to browse through various local grocers within one app. Users can browse all stores but will need to register to purchase and view their cart.
 
 ## Link
